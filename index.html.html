@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Racismo contra a população afro-indígena</title>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ============================================
+     TOKENS
+     Paleta: terra queimada, urucum, argila/ocre,
+     verde-mata, fibra clara — evoca pigmentos e
+     materiais usados em grafismos corporais
+     indígenas e na cultura afro-brasileira.
+  ============================================ */
+  :root {
+    --bg-base:      #1C1712;   /* terra queimada / carvão */
+    --bg-raised:    #26201A;   /* camada elevada, mesma família */
+    --urucum:       #C24325;   /* vermelho-tijolo, pigmento de urucum */
+    --ocre:         #D3A039;   /* argila / ocre amarelo */
+    --verde-mata:   #3E5C46;   /* verde-mata, folhagem */
+    --fibra:        #F1E7D6;   /* texto principal, cor de fibra clara */
+    --fibra-suave:  #C9BCA6;   /* texto secundário */
+    --linha:        #443A2E;   /* divisores, bordas discretas */
+
+    --fonte-titulo: 'Fraunces', serif;
+    --fonte-corpo:  'Work Sans', sans-serif;
+
+    --max-largura: 1120px;
+    --espaco-sec:  7rem;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg-base);
+    color: var(--fibra);
+    font-family: var(--fonte-corpo);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img, svg { display: block; max-width: 100%; }
+
+  a { color: inherit; text-decoration: none; }
+
+  :focus-visible {
+    outline: 2px solid var(--ocre);
+    outline-offset: 3px;
+  }
+
+  .container {
+    max-width: var(--max-largura);
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .eyebrow {
+    display: inline-block;
+    font-family: var(--fonte-corpo);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ocre);
+    margin-bottom: 1rem;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--fonte-titulo);
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--fibra);
+  }
+
+  /* ============================================
+     MARCA GRÁFICA — divisor assinatura
+     Padrão de linhas geométricas inspirado em
+     grafismos corporais indígenas e adornos
+     afro-brasileiros: usado como respiro entre
+     seções, não como decoração vazia.
+  ============================================ */
+  .marca-divisoria {
+    width: 100%;
+    height: 28px;
+    margin: 0 auto;
+  }
+  .marca-divisoria svg { width: 100%; height: 100%; }
+
+  /* ============================================
+     HEADER / NAV
+  ============================================ */
+  header.topo {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(28, 23, 18, 0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--linha);
+  }
+
+  .nav-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 2rem;
+    max-width: var(--max-largura);
+    margin: 0 auto;
+  }
+
+  .marca-nome {
+    font-family: var(--fonte-titulo);
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+  .marca-nome span { color: var(--urucum); }
+
+  nav.links {
+    display: flex;
+    gap: 2rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  nav.links a {
+    color: var(--fibra-suave);
+    transition: color 0.2s ease;
+  }
+  nav.links a:hover { color: var(--ocre); }
+
+  .nav-toggle { display: none; }
+
+  /* ============================================
+     HERO
+  ============================================ */
+  .hero {
+    padding: 6rem 2rem 5rem;
+    max-width: var(--max-largura);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    max-width: 14ch;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--urucum);
+  }
+
+  .hero-sub {
+    margin-top: 1.5rem;
+    max-width: 46ch;
+    color: var(--fibra-suave);
+    font-size: 1.05rem;
+  }
+
+  .hero-cta {
+    margin-top: 2.25rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .botao {
+    display: inline-block;
+    padding: 0.85rem 1.6rem;
+    border-radius: 2px;
+    font-weight: 600;
+    font-size: 0.92rem;
+    transition: transform 0.15s ease, background 0.2s ease;
+  }
+  .botao-primario {
+    background: var(--urucum);
+    color: var(--fibra);
+  }
+  .botao-primario:hover { transform: translateY(-2px); }
+  .botao-secundario {
+    border: 1px solid var(--linha);
+    color: var(--fibra);
+  }
+  .botao-secundario:hover { border-color: var(--ocre); color: var(--ocre); }
+
+  .hero-visual {
+    aspect-ratio: 4 / 5;
+    background: var(--bg-raised);
+    border: 1px solid var(--linha);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--fibra-suave);
+    font-size: 0.85rem;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  /* ============================================
+     SEÇÃO GENÉRICA
+  ============================================ */
+  section { padding: var(--espaco-sec) 0; }
+
+  .cabecalho-secao {
+    max-width: 60ch;
+    margin-bottom: 3rem;
+  }
+  .cabecalho-secao h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); }
+  .cabecalho-secao p {
+    margin-top: 1rem;
+    color: var(--fibra-suave);
+  }
+
+  /* ============================================
+     CONTEXTO
+  ============================================ */
+  .contexto-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+  }
+  .contexto-bloco {
+    border-left: 2px solid var(--urucum);
+    padding-left: 1.5rem;
+  }
+  .contexto-bloco h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.6rem;
+  }
+  .contexto-bloco p {
+    color: var(--fibra-suave);
+    font-size: 0.95rem;
+  }
+
+  /* ============================================
+     DADOS / ESTATÍSTICAS
+  ============================================ */
+  .dados-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--linha);
+    border: 1px solid var(--linha);
+  }
+  .dado-card {
+    background: var(--bg-base);
+    padding: 2.5rem 2rem;
+  }
+  .dado-numero {
+    font-family: var(--fonte-titulo);
+    font-size: 2.6rem;
+    color: var(--ocre);
+    line-height: 1;
+  }
+  .dado-legenda {
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--fibra-suave);
+  }
+  .dado-fonte {
+    margin-top: 1rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #786c58;
+  }
+
+  /* ============================================
+     LINHA DO TEMPO
+     (numeração/datas cabem aqui: é conteúdo
+     genuinamente cronológico)
+  ============================================ */
+  .timeline {
+    position: relative;
+    padding-left: 2.5rem;
+    border-left: 1px solid var(--linha);
+  }
+  .timeline-item {
+    position: relative;
+    padding-bottom: 3rem;
+  }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -2.55rem;
+    top: 0.3rem;
+    width: 10px;
+    height: 10px;
+    background: var(--urucum);
+    border-radius: 50%;
+  }
+  .timeline-ano {
+    font-family: var(--fonte-titulo);
+    color: var(--ocre);
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+  }
+  .timeline-item h3 { font-size: 1.15rem; margin-bottom: 0.4rem; }
+  .timeline-item p { color: var(--fibra-suave); font-size: 0.95rem; max-width: 60ch; }
+
+  /* ============================================
+     VÍDEO
+  ============================================ */
+  .video-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 860px;
+    aspect-ratio: 16 / 9;
+    background: var(--bg-raised);
+    border: 1px solid var(--linha);
+    overflow: hidden;
+  }
+  .video-wrap iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  /* ============================================
+     VOZES / DEPOIMENTOS
+  ============================================ */
+  .vozes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem;
+  }
+  .voz-card {
+    background: var(--bg-raised);
+    border: 1px solid var(--linha);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .voz-texto {
+    font-family: var(--fonte-titulo);
+    font-size: 1.05rem;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .voz-autor {
+    font-size: 0.8rem;
+    color: var(--fibra-suave);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .voz-autor::before {
+    content: "";
+    width: 18px;
+    height: 2px;
+    background: var(--verde-mata);
+  }
+
+  /* ============================================
+     AÇÃO / RECURSOS
+  ============================================ */
+  .acao {
+    background: var(--bg-raised);
+    border-top: 1px solid var(--linha);
+    border-bottom: 1px solid var(--linha);
+  }
+  .acao-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .recursos-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .recurso-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--linha);
+    font-size: 0.95rem;
+  }
+  .recurso-item span.tipo {
+    color: var(--fibra-suave);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* ============================================
+     FOOTER
+  ============================================ */
+  footer {
+    padding: 3rem 0 2.5rem;
+    border-top: 1px solid var(--linha);
+  }
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-inner p {
+    color: var(--fibra-suave);
+    font-size: 0.85rem;
+  }
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.85rem;
+    color: var(--fibra-suave);
+  }
+  .footer-links a:hover { color: var(--ocre); }
+
+  /* ============================================
+     RESPONSIVO
+  ============================================ */
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; }
+    .contexto-grid { grid-template-columns: 1fr; }
+    .dados-grid { grid-template-columns: 1fr; }
+    .vozes-grid { grid-template-columns: 1fr; }
+    .acao-inner { grid-template-columns: 1fr; }
+    nav.links { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .botao-primario:hover { transform: none; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="topo">
+    <div class="nav-wrap">
+      <div class="marca-nome">Raízes<span>&</span>Resistência</div>
+      <nav class="links">
+        <a href="#contexto">Contexto</a>
+        <a href="#dados">Dados</a>
+        <a href="#historia">História</a>
+        <a href="#video">Vídeo</a>
+        <a href="#vozes">Vozes</a>
+        <a href="#acao">Ação</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <span class="eyebrow">Trabalho escolar &mdash; consciência racial</span>
+        <h1>Racismo contra a população <em>afro-indígena</em></h1>
+        <p class="hero-sub">
+          [Texto de abertura: breve chamada explicando o objetivo da página e por que esse tema importa. Substituir por conteúdo final.]
+        </p>
+        <div class="hero-cta">
+          <a href="#contexto" class="botao botao-primario">Entender o contexto</a>
+          <a href="#acao" class="botao botao-secundario">Ver como agir</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        [espaço reservado para imagem, ilustração ou mapa de destaque]
+      </div>
+    </section>
+
+    <div class="marca-divisoria">
+      <svg viewBox="0 0 1120 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="0" y1="14" x2="1120" y2="14" stroke="#443A2E" stroke-width="1"/>
+        <g stroke="#C24325" stroke-width="2" stroke-linecap="round">
+          <path d="M40 4 L60 24" /><path d="M60 4 L40 24" />
+          <path d="M160 4 L180 24" /><path d="M180 4 L160 24" />
+          <path d="M280 4 L300 24" /><path d="M300 4 L280 24" />
+        </g>
+        <g stroke="#D3A039" stroke-width="2" stroke-linecap="round">
+          <path d="M400 14 L420 4 L440 14 L420 24 Z" fill="none"/>
+          <path d="M540 14 L560 4 L580 14 L560 24 Z" fill="none"/>
+          <path d="M680 14 L700 4 L720 14 L700 24 Z" fill="none"/>
+        </g>
+        <g stroke="#3E5C46" stroke-width="2" stroke-linecap="round">
+          <path d="M800 4 L820 24" /><path d="M820 4 L800 24" />
+          <path d="M920 4 L940 24" /><path d="M940 4 L920 24" />
+          <path d="M1040 4 L1060 24" /><path d="M1060 4 L1040 24" />
+        </g>
+      </svg>
+    </div>
+
+    <!-- CONTEXTO -->
+    <section id="contexto" class="container">
+      <div class="cabecalho-secao">
+        <span class="eyebrow">01 &mdash; Contexto</span>
+        <h2>Duas trajetórias, uma mesma estrutura de exclusão</h2>
+        <p>[Parágrafo introdutório situando o racismo estrutural contra pessoas negras e indígenas no Brasil. Substituir por conteúdo final.]</p>
+      </div>
+      <div class="contexto-grid">
+        <div class="contexto-bloco">
+          <h3>População negra</h3>
+          <p>[Placeholder: breve nota de contexto histórico e atual. Substituir por conteúdo final.]</p>
+        </div>
+        <div class="contexto-bloco">
+          <h3>Povos indígenas</h3>
+          <p>[Placeholder: breve nota de contexto histórico e atual. Substituir por conteúdo final.]</p>
+        </div>
+        <div class="contexto-bloco">
+          <h3>Interseções</h3>
+          <p>[Placeholder: onde as duas pautas se cruzam — território, invisibilidade, violência. Substituir por conteúdo final.]</p>
+        </div>
+        <div class="contexto-bloco">
+          <h3>Por que falar disso hoje</h3>
+          <p>[Placeholder: relevância atual do tema, dados recentes ou eventos. Substituir por conteúdo final.]</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DADOS -->
+    <section id="dados" class="container">
+      <div class="cabecalho-secao">
+        <span class="eyebrow">02 &mdash; Dados</span>
+        <h2>O que os números mostram</h2>
+        <p>[Nota curta sobre a origem dos dados que serão usados aqui. Substituir por conteúdo final.]</p>
+      </div>
+      <div class="dados-grid">
+        <div class="dado-card">
+          <div class="dado-numero">00%</div>
+          <div class="dado-legenda">[legenda do indicador]</div>
+          <div class="dado-fonte">[fonte, ano]</div>
+        </div>
+        <div class="dado-card">
+          <div class="dado-numero">00%</div>
+          <div class="dado-legenda">[legenda do indicador]</div>
+          <div class="dado-fonte">[fonte, ano]</div>
+        </div>
+        <div class="dado-card">
+          <div class="dado-numero">00%</div>
+          <div class="dado-legenda">[legenda do indicador]</div>
+          <div class="dado-fonte">[fonte, ano]</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="marca-divisoria">
+      <svg viewBox="0 0 1120 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="0" y1="14" x2="1120" y2="14" stroke="#443A2E" stroke-width="1"/>
+        <g stroke="#C24325" stroke-width="2" stroke-linecap="round">
+          <path d="M40 4 L60 24" /><path d="M60 4 L40 24" />
+          <path d="M160 4 L180 24" /><path d="M180 4 L160 24" />
+          <path d="M280 4 L300 24" /><path d="M300 4 L280 24" />
+        </g>
+        <g stroke="#D3A039" stroke-width="2" stroke-linecap="round">
+          <path d="M400 14 L420 4 L440 14 L420 24 Z" fill="none"/>
+          <path d="M540 14 L560 4 L580 14 L560 24 Z" fill="none"/>
+          <path d="M680 14 L700 4 L720 14 L700 24 Z" fill="none"/>
+        </g>
+        <g stroke="#3E5C46" stroke-width="2" stroke-linecap="round">
+          <path d="M800 4 L820 24" /><path d="M820 4 L800 24" />
+          <path d="M920 4 L940 24" /><path d="M940 4 L920 24" />
+          <path d="M1040 4 L1060 24" /><path d="M1060 4 L1040 24" />
+        </g>
+      </svg>
+    </div>
+
+    <!-- LINHA DO TEMPO -->
+    <section id="historia" class="container">
+      <div class="cabecalho-secao">
+        <span class="eyebrow">03 &mdash; História</span>
+        <h2>Marcos de resistência</h2>
+        <p>[Nota curta introduzindo a linha do tempo. Substituir por conteúdo final.]</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-ano">[ano]</div>
+          <h3>[Nome do marco histórico]</h3>
+          <p>[Breve descrição do evento e sua importância. Substituir por conteúdo final.]</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-ano">[ano]</div>
+          <h3>[Nome do marco histórico]</h3>
+          <p>[Breve descrição do evento e sua importância. Substituir por conteúdo final.]</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-ano">[ano]</div>
+          <h3>[Nome do marco histórico]</h3>
+          <p>[Breve descrição do evento e sua importância. Substituir por conteúdo final.]</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- VÍDEO -->
+    <section id="video" class="container">
+      <div class="cabecalho-secao">
+        <span class="eyebrow">04 &mdash; Vídeo</span>
+        <h2>Assista</h2>
+        <p>[Nota curta explicando o que é o vídeo e por que ele foi escolhido. Substituir por conteúdo final.]</p>
+      </div>
+      <div class="video-wrap">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/0Q6diw5kCjQ"
+          title="Vídeo incorporado do YouTube"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </section>
+
+    <!-- VOZES -->
+    <section id="vozes" class="container">
+      <div class="cabecalho-secao">
+        <span class="eyebrow">05 &mdash; Vozes</span>
+        <h2>Quem vive, quem fala</h2>
+        <p>[Nota curta sobre a fonte dos depoimentos ou citações usadas. Substituir por conteúdo final.]</p>
+      </div>
+      <div class="vozes-grid">
+        <div class="voz-card">
+          <p class="voz-texto">"[Espaço reservado para citação ou depoimento]"</p>
+          <div class="voz-autor">[Nome, referência]</div>
+        </div>
+        <div class="voz-card">
+          <p class="voz-texto">"[Espaço reservado para citação ou depoimento]"</p>
+          <div class="voz-autor">[Nome, referência]</div>
+        </div>
+        <div class="voz-card">
+          <p class="voz-texto">"[Espaço reservado para citação ou depoimento]"</p>
+          <div class="voz-autor">[Nome, referência]</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AÇÃO -->
+    <section id="acao" class="acao">
+      <div class="container acao-inner">
+        <div>
+          <span class="eyebrow">06 &mdash; Ação</span>
+          <h2>O que fazer com essa informação</h2>
+          <p class="hero-sub">[Parágrafo de fechamento com um convite claro à reflexão ou ação. Substituir por conteúdo final.]</p>
+        </div>
+        <div class="recursos-lista">
+          <div class="recurso-item">
+            <span>[Nome do recurso ou organização]</span>
+            <span class="tipo">Leitura</span>
+          </div>
+          <div class="recurso-item">
+            <span>[Nome do recurso ou organização]</span>
+            <span class="tipo">Denúncia</span>
+          </div>
+          <div class="recurso-item">
+            <span>[Nome do recurso ou organização]</span>
+            <span class="tipo">Apoio</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <p>[Nome do(a) autor(a)] &middot; Trabalho escolar &middot; [ano]</p>
+      <div class="footer-links">
+        <a href="#contexto">Contexto</a>
+        <a href="#dados">Dados</a>
+        <a href="#acao">Ação</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
